@@ -1,6 +1,8 @@
-# OpenCloud Compose
+# OpenCloud Quadlets
 
 This repository provides quadlet files for deploying OpenCloud in various stack configurations for podman and systemd.
+
+The /config/ directory and .env files are included via submodule. 
 
 > [!IMPORTANT]
 > Please use the [official docs](https://docs.opencloud.eu/docs/admin/getting-started/container/docker-compose/docker-compose-base) for a **Production Deployment**.
@@ -38,13 +40,15 @@ OpenCloud quadlets offers a modular approach to deploying OpenCloud with several
    cd ~/.config/container/systemd
    ```
 
-1. **Clone the repository**:
+1. **Clone the repositories**:
    ```bash
    git clone https://github.com/wa-gtj/opencloud-quadlets.git .
+   git clone https://github.com/wa-gtj/opencloud-compose.git opencloud-stack-common
    ```
 
 2. **Create environment file**:
    ```bash
+   cd opencloud-stack-common
    cp .env.example .env
    ```
 
