@@ -1,13 +1,13 @@
 # OpenCloud Compose
 
-This repository provides Docker Compose configurations for deploying OpenCloud in various environments.
+This repository provides quadlet files for deploying OpenCloud in various stack configurations for podman and systemd.
 
 > [!IMPORTANT]
 > Please use the [official docs](https://docs.opencloud.eu/docs/admin/getting-started/container/docker-compose/docker-compose-base) for a **Production Deployment**.
 
 ## Overview
 
-OpenCloud Compose offers a modular approach to deploying OpenCloud with several configuration options:
+OpenCloud quadlets offers a modular approach to deploying OpenCloud with several configuration options:
 
 - **Standard deployment** with Traefik reverse proxy and Let's Encrypt certificates or certificates from files
 - **External proxy** support for environments with existing reverse proxies (like Nginx, Caddy, etc.)
@@ -24,19 +24,23 @@ OpenCloud Compose offers a modular approach to deploying OpenCloud with several 
 
 ### Prerequisites
 
-- Docker and Docker Compose v2 installed.
+- podman installed with at least versin 6.1.4
 - Domain names pointing to your server (for production deployment)
-- Basic understanding of Docker Compose concepts
+- Basic understanding of podman and systemd concepts
 
 > [!IMPORTANT]
-> Please use the docker installation guide from the [Official Documentation](https://docs.docker.com/engine/install/) to ensure using docker compose v2. Official linux distro package repositories might still contain docker compose v1, e.g. Debian 12 "Bookworm". Using docker compose v1 will lead to a broken docker deployment.
+> Please ensure using at least version 6.1.4 of podman. Official linux distro package repositories might still contain older versions, e.g. Debian 13 "Trixie" still provides version 5.4.2. Using podman versions older than 6.1.4 will lead to a broken  deployment as podman does not resolve the drop-in-files properly.
 
 ### Local Development
 
+0. **Change into podman container directory**
+   ```bash
+   cd ~/.config/container/systemd
+   ```
+
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/opencloud-eu/opencloud-compose.git
-   cd opencloud-compose
+   git clone https://github.com/wa-gtj/opencloud-quadlets.git .
    ```
 
 2. **Create environment file**:
@@ -44,27 +48,24 @@ OpenCloud Compose offers a modular approach to deploying OpenCloud with several 
    cp .env.example .env
    ```
 
-   > **Note**: The repository includes `.env.example` as a template with default settings and documentation. Your actual `.env` file is excluded from version control (via `.gitignore`) to prevent accidentally committing sensitive information like passwords and domain-specific settings.
+   > **Note**: The repository includes `.env.example` as a template file. Your actual `.env` file is excluded from version control (via `.gitignore`) to prevent accidentally committing sensitive information like passwords and domain-specific settings. All variables are commented out by default.
 
 3. **Set admin password**:
    set `INITIAL_ADMIN_PASSWORD=your_secure_password` environment variable in your `.env` file
+
 4. **Domain**:
    optionally, set `OC_DOMAIN=your-domain.com` to overwrite the default `cloud.opencloud.test`
+
 5. **Configure deployment options**:
 
-   You can deploy using explicit `-f` flags:
+  symlink opencloud@.container to the desired stack scope:
    ```bash
-   docker compose -f docker-compose.yml -f traefik/opencloud.yml up -d
-   ```
-
-   Or by adding the `COMPOSE_FILE` variable in `.env`:
-   ```
-   COMPOSE_FILE=docker-compose.yml:traefik/opencloud.yml
+   ln -s opencloud@.container opencloud@standard.container
    ```
 
    Then simply run:
    ```bash
-   docker compose up -d
+   systemctl --user daemon-reload
    ```
 
 6. **Add local domains to `/etc/hosts`** (for local development only):
