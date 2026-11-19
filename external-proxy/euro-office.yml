@@ -1,6 +1,0 @@
----
-services:
-  euro-office:
-    ports:
-      # expose the euro-office document server on localhost
-      - "127.0.0.1:9900:80"
