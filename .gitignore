@@ -7,8 +7,8 @@
 !/config/opencloud/apps/.gitkeep
 !/config/opencloud/apps/maps
 
-# exclude custom compose files
-/custom
+# exclude *-custom.container.d pull-ins
+/*-custom.container.d/*
 
 # exclude certificates
 /certs/*
