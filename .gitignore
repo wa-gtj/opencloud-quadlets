@@ -1,19 +1,19 @@
 .idea
 # exclude the .env file which will be created from env.example
-.env
+/opencloud-stack-common/.env
 
 # exclude the apps folder
-/config/opencloud/apps/*
-!/config/opencloud/apps/.gitkeep
-!/config/opencloud/apps/maps
+/opencloud-stack-common/config/opencloud/apps/*
+!/opencloud-stack-common/config/opencloud/apps/.gitkeep
+!/opencloud-stack-common/config/opencloud/apps/maps
 
 # exclude *-custom.container.d pull-ins
 /*-custom.container.d/*
 
 # exclude certificates
-/certs/*
-!/certs/.gitkeep
+/opencloud-stack-common/certs/*
+!/opencloud-stack-common/certs/.gitkeep
 
 # exclude the certificates config folder
-/config/traefik/dynamic/*
-!/config/traefik/dynamic/.gitkeep
+/opencloud-stack-common/config/traefik/dynamic/*
+!/opencloud-stack-common/config/traefik/dynamic/.gitkeep
