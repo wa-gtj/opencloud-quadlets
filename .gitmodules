@@ -1,0 +1,6 @@
+[submodule "opencloud-stack-common"]
+	path = opencloud-stack-common
+	url = git@github.com:wa-gtj/opencloud-stack-common.git
+[submodule "opencloud-stack-common-test"]
+	path = opencloud-stack-common-test
+	url = git@github.com:wa-gtj/opencloud-stack-common.git
