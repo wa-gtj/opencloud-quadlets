@@ -49,7 +49,7 @@ OpenCloud quadlets offers a modular approach to deploying OpenCloud with several
 2. **Create environment file**:
    ```bash
    cd opencloud-stack-common
-   cp .env.example .env
+   cp .env.example opencloud-overrides.env
    ```
 
    > **Note**: The repository includes `.env.example` as a template file. Your actual `.env` file is excluded from version control (via `.gitignore`) to prevent accidentally committing sensitive information like passwords and domain-specific settings. All variables are commented out by default.
