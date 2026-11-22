@@ -1,0 +1,9 @@
+[Unit]
+Description=Internal Podman network for opencloud
+
+[Network]
+NetworkName=opencloud-net
+# Internal=true
+
+[Install]
+WantedBy=opencloud.target

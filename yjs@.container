@@ -1,0 +1,30 @@
+[Unit]
+Description=YJS Container, providing collaboration for Opencloud stack
+
+[Container]
+# Container
+ContainerName=yjs
+Image=${YJS_DOCKER_IMAGE}:${YJS_DOCKER_TAG}
+
+# User
+UserNS=keep-id:uid=1000,gid=1000
+LogDriver=${LOG_DRIVER}
+
+# Network
+Network=opencloud-net
+
+# Environment
+Environment=PORT=1234
+Environment=OPENCLOUD_URL=${YJS_OPENCLOUD_URL}
+Environment=SHUTDOWN_GRACE_PERIOD_MS=${YJS_SHUTDOWN_GRACE_PERIOD_MS}
+
+
+[Service]
+EnvironmentFile=%h/.config/containers/systemd/opencloud-stack-common/opencloud_defaults.env
+EnvironmentFile=-%h/.config/containers/systemd/opencloud-stack-common/opencloud_overrides.env
+
+Restart=always
+TimeOutStartSec=900
+TimeoutStopSec=20
+
+[Install]

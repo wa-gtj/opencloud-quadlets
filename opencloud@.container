@@ -1,0 +1,67 @@
+[Unit]
+Description=Main Container for Opencloud stack
+
+[Container]
+# Container
+ContainerName=opencloud
+Image=${OC_DOCKER_IMAGE}:${OC_DOCKER_TAG}
+Entrypoint=["/bin/sh"]
+Exec=-c 'opencloud init || true; opencloud server'
+
+# User
+UserNS=keep-id:uid=1000,gid=1000
+LogDriver=${LOG_DRIVER}
+
+# Volumes
+Volume=%h/.config/containers/systemd/config/opencloud/csp.yaml:/etc/opencloud/csp.yaml:z
+Volume=%h/.config/containers/systemd/config/opencloud/apps.yaml:/etc/opencloud/apps.yaml:z
+Volume=%h/.config/containers/systemd/config/opencloud/banned-password-list.txt:/etc/opencloud/banned-password-list.txt:z,ro
+Volume=%h/.config/containers/systemd/config/opencloud/apps/:/var/lib/opencloud/web/assets/apps:z
+Volume=${OC_CONFIG_DIR}:/etc/opencloud:z
+Volume=${OC_DATA_DIR}:/var/lib/opencloud:z
+
+# Network
+Network=opencloud-net
+# No published port, as Traefik will be on the same network as opencloud and know the port by setting a label.
+
+# Environment
+Environment=OC_ADD_RUN_SERVICES=${START_ADDITIONAL_SERVICES}
+Environment=OC_URL=https://${OC_DOMAIN}
+Environment=OC_LOG_LEVEL=${LOG_LEVEL}
+Environment=OC_LOG_COLOR=${LOG_PRETTY}
+Environment=OC_LOG_PRETTY=${LOG_PRETTY}
+Environment=PROXY_TLS=${PROXY_TLS}
+Environment=OC_INSECURE=${INSECURE}
+Environment=PROXY_ENABLE_BASIC_AUTH=${PROXY_ENABLE_BASIC_AUTH}
+Environment=IDM_CREATE_DEMO_USERS=${DEMO_USERS}
+Environment=IDM_ADMIN_PASSWORD=${INITIAL_ADMIN_PASSWORD}
+Environment=NOTIFICATIONS_SMTP_HOST=${SMTP_HOST}
+Environment=NOTIFICATIONS_SMTP_PORT=${SMTP_PORT}
+Environment=NOTIFICATIONS_SMTP_SENDER=${SMTP_SENDER}
+Environment=NOTIFICATIONS_SMTP_USERNAME=${SMTP_USERNAME}
+Environment=NOTIFICATIONS_SMTP_PASSWORD=${SMTP_PASSWORD}
+Environment=NOTIFICATIONS_SMTP_INSECURE=${SMTP_INSECURE}
+Environment=NOTIFICATIONS_SMTP_AUTHENTICATION=${SMTP_AUTHENTICATION}
+Environment=NOTIFICATIONS_SMTP_ENCRYPTION=${SMTP_TRANSPORT_ENCRYPTION}
+Environment=FRONTEND_ARCHIVER_MAX_SIZE=${FRONTEND_ARCHIVER_MAX_SIZE}
+Environment=FRONTEND_CHECK_FOR_UPDATES=${CHECK_FOR_UPDATES}
+Environment=PROXY_CSP_CONFIG_FILE_LOCATION=${PROXY_CSP_CONFIG_FILE_LOCATION}
+Environment=OC_PASSWORD_POLICY_BANNED_PASSWORDS_LIST=${OC_PASSWORD_POLICY_BANNED_PASSWORDS_LIST}
+Environment=OC_SHARING_PUBLIC_SHARE_MUST_HAVE_PASSWORD=${OC_SHARING_PUBLIC_SHARE_MUST_HAVE_PASSWORD}
+Environment=OC_SHARING_PUBLIC_WRITEABLE_SHARE_MUST_HAVE_PASSWORD=${OC_SHARING_PUBLIC_WRITEABLE_SHARE_MUST_HAVE_PASSWORD}
+Environment=OC_PASSWORD_POLICY_DISABLED=${OC_PASSWORD_POLICY_DISABLED}
+Environment=OC_PASSWORD_POLICY_MIN_CHARACTERS=${OC_PASSWORD_POLICY_MIN_CHARACTERS}
+Environment=OC_PASSWORD_POLICY_MIN_LOWERCASE_CHARACTERS=${OC_PASSWORD_POLICY_MIN_LOWERCASE_CHARACTERS}
+Environment=OC_PASSWORD_POLICY_MIN_UPPERCASE_CHARACTERS=${OC_PASSWORD_POLICY_MIN_UPPERCASE_CHARACTERS}
+Environment=OC_PASSWORD_POLICY_MIN_DIGITS=${OC_PASSWORD_POLICY_MIN_DIGITS}
+Environment=OC_PASSWORD_POLICY_MIN_SPECIAL_CHARACTERS=${OC_PASSWORD_POLICY_MIN_SPECIAL_CHARACTERS}
+Environment=OC_DEFAULT_LANGUAGE=${DEFAULT_LANGUAGE}
+
+[Service]
+EnvironmentFile=%h/.config/containers/systemd/opencloud-stack-common/opencloud_defaults.env
+EnvironmentFile=-%h/.config/containers/systemd/opencloud-stack-common/opencloud_overrides.env
+
+Restart=always
+TimeOutStartSec=900
+
+[Install]
