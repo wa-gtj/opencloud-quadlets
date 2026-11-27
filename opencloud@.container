@@ -58,8 +58,8 @@ Environment=OC_PASSWORD_POLICY_MIN_SPECIAL_CHARACTERS=${OC_PASSWORD_POLICY_MIN_S
 Environment=OC_DEFAULT_LANGUAGE=${DEFAULT_LANGUAGE}
 
 [Service]
-EnvironmentFile=%h/.config/containers/systemd/opencloud-stack-common/opencloud_defaults.env
-EnvironmentFile=-%h/.config/containers/systemd/opencloud-stack-common/opencloud_overrides.env
+EnvironmentFile=%h/.config/containers/systemd/opencloud-stack-common/opencloud-defaults.env
+EnvironmentFile=-%h/.config/containers/systemd/opencloud-stack-common/opencloud-overrides.env
 
 Restart=always
 TimeoutStartSec=900

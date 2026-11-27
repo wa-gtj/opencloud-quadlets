@@ -44,8 +44,8 @@ Label=traefik.http.routers.traefik.${TRAEFIK_SERVICES_TLS_CONFIG}
 Label=traefik.http.routers.traefik.service=api@internal
 
 [Service]
-EnvironmentFile=%h/.config/containers/systemd/opencloud-stack-common/opencloud_defaults.env
-EnvironmentFile=-%h/.config/containers/systemd/opencloud-stack-common/opencloud_overrides.env
+EnvironmentFile=%h/.config/containers/systemd/opencloud-stack-common/opencloud-defaults.env
+EnvironmentFile=-%h/.config/containers/systemd/opencloud-stack-common/opencloud-overrides.env
 
 Restart=always
 TimeOutStartSec=900
