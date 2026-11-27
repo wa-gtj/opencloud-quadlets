@@ -1,7 +1,1 @@
-[submodule "opencloud-stack-common"]
-	path = opencloud-stack-common
-	url = https://github.com/wa-gtj/opencloud-compose.git
-	branch = quadlets-readiness
-[submodule "opencloud-stack-common-test"]
-	path = opencloud-stack-common-test
-	url = git@github.com:wa-gtj/opencloud-stack-common.git
+
