@@ -10,7 +10,9 @@ Exec=-c 'opencloud init || true; opencloud server'
 
 # User
 UserNS=keep-id:uid=1000,gid=1000
-LogDriver=${LOG_DRIVER}
+# uncomment to use specific log driver
+# beware, that podman doesn't have logdriver "local"
+# LogDriver=${LOG_DRIVER}
 
 # Volumes
 Volume=%h/.config/containers/systemd/opencloud-stack-common/config/opencloud/csp.yaml:/etc/opencloud/csp.yaml:z
