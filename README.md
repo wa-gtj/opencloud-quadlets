@@ -43,7 +43,8 @@ OpenCloud quadlets offers a modular approach to deploying OpenCloud with several
 1. **Clone the repositories**:
    ```bash
    git clone https://github.com/wa-gtj/opencloud-quadlets.git .
-   git clone https://github.com/wa-gtj/opencloud-compose.git opencloud-stack-common
+   cd opencloud-stack-common
+   git submodule update --init
    ```
 
 2. **Create environment file**:
@@ -62,7 +63,7 @@ OpenCloud quadlets offers a modular approach to deploying OpenCloud with several
 
 5. **Configure deployment options**:
 
-  symlink opencloud@.container to the desired stack scope:
+  in ~/.config/containers/systemd/: symlink opencloud@.container to the desired stack scope:
    ```bash
    ln -s opencloud@.container opencloud@standard.container
    ```
