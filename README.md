@@ -49,14 +49,13 @@ OpenCloud quadlets offers a modular approach to deploying OpenCloud with several
 
 2. **Create environment file**:
    ```bash
-   cd opencloud-stack-common
    cp .env.example opencloud-overrides.env
    ```
 
    > **Note**: The repository includes `.env.example` as a template file. Your actual `.env` file is excluded from version control (via `.gitignore`) to prevent accidentally committing sensitive information like passwords and domain-specific settings. All variables are commented out by default.
 
 3. **Set admin password**:
-   set `INITIAL_ADMIN_PASSWORD=your_secure_password` environment variable in your `.env` file
+   set `INITIAL_ADMIN_PASSWORD=your_secure_password` environment variable in your `opencloud-overrides.env` file
 
 4. **Domain**:
    optionally, set `OC_DOMAIN=your-domain.com` to overwrite the default `cloud.opencloud.test`
