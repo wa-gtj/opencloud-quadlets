@@ -13,10 +13,10 @@ UserNS=keep-id:uid=1000,gid=1000
 LogDriver=${LOG_DRIVER}
 
 # Volumes
-Volume=%h/.config/containers/systemd/config/opencloud/csp.yaml:/etc/opencloud/csp.yaml:z
-Volume=%h/.config/containers/systemd/config/opencloud/apps.yaml:/etc/opencloud/apps.yaml:z
-Volume=%h/.config/containers/systemd/config/opencloud/banned-password-list.txt:/etc/opencloud/banned-password-list.txt:z,ro
-Volume=%h/.config/containers/systemd/config/opencloud/apps/:/var/lib/opencloud/web/assets/apps:z
+Volume=%h/.config/containers/systemd/opencloud-stack-common/config/opencloud/csp.yaml:/etc/opencloud/csp.yaml:z
+Volume=%h/.config/containers/systemd/opencloud-stack-common/config/opencloud/apps.yaml:/etc/opencloud/apps.yaml:z
+Volume=%h/.config/containers/systemd/opencloud-stack-common/config/opencloud/banned-password-list.txt:/etc/opencloud/banned-password-list.txt:z,ro
+Volume=%h/.config/containers/systemd/opencloud-stack-common/config/opencloud/apps/:/var/lib/opencloud/web/assets/apps:z
 Volume=${OC_CONFIG_DIR}:/etc/opencloud:z
 Volume=${OC_DATA_DIR}:/var/lib/opencloud:z
 

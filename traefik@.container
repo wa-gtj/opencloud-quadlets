@@ -14,9 +14,9 @@ LogDriver=${LOG_DRIVER}
 
 # Volumes
 Volume=${DOCKER_SOCKET_PATH}:/var/run/docker.sock:ro
-Volume=%h/.config/containers/systremd/config/traefik/docker-entrypoint-override.sh:/opt/traefik/bin/docker-entrypoint-override.sh
+Volume=%h/.config/containers/systemd/opencloud-stack-common/config/traefik/docker-entrypoint-override.sh:/opt/traefik/bin/docker-entrypoint-override.sh
 Volume=${TRAEFIK_CERTS_DIR}:/certs
-Volume=%h/.config/containers/systemd/config/traefik/dynamic:/etc/traefik/dynamic:z
+Volume=%h/.config/containers/systemd/opencloud-stack-common/config/traefik/dynamic:/etc/traefik/dynamic:z
 
 # Network
 Network=opencloud-net
