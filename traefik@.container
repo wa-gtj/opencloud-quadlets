@@ -48,6 +48,6 @@ EnvironmentFile=%h/.config/containers/systemd/opencloud-stack-common/opencloud-d
 EnvironmentFile=-%h/.config/containers/systemd/opencloud-stack-common/opencloud-overrides.env
 
 Restart=always
-TimeOutStartSec=900
+TimeoutStartSec=900
 
 [Install]
